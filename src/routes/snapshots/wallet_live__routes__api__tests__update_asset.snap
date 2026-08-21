@@ -1,0 +1,10 @@
+---
+source: src/routes/api.rs
+expression: updated_asset
+---
+{
+  "id": 1,
+  "name": "Ethereum",
+  "unit_value": 20.0,
+  "quantity": 3.0
+}
