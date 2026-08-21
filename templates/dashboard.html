@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteira de Investimentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-950 min-h-screen py-10 px-4" style="font-family: 'Space Mono', monospace;">
+    <div class="max-w-3xl mx-auto flex flex-col gap-6">
+        <div class="flex items-center justify-between">
+            <h1 class="text-white text-xl">Ola, {{ username }}</h1>
+            <span class="text-white/40 text-sm">Carteira de Investimentos Inteligente</span>
+        </div>
+
+        <div class="w-full bg-white/5 backdrop-blur-xl border border-cyan-400/30 rounded-2xl p-6 shadow-[0_0_30px_rgba(34,211,238,0.1)]">
+            <p class="text-white/50 text-sm mb-1">Valor total da carteira</p>
+            <p class="text-cyan-400 text-3xl font-bold">R$ {{ total_value_formatted }}</p>
+        </div>
+
+        <div class="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden">
+            <table class="w-full text-left text-white">
+                <thead>
+                    <tr class="border-b border-white/10 text-white/40 text-sm">
+                        <th class="px-6 py-3">Ativo</th>
+                        <th class="px-6 py-3">Preco Unitario</th>
+                        <th class="px-6 py-3">Quantidade</th>
+                        <th class="px-6 py-3">Valor Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in assets %}
+                    <tr class="border-b border-white/5">
+                        <td class="px-6 py-3">{{ row.asset.name }}</td>
+                        <td class="px-6 py-3">R$ {{ row.unit_value_formatted }}</td>
+                        <td class="px-6 py-3">{{ row.quantity_formatted }}</td>
+                        <td class="px-6 py-3 text-cyan-400">R$ {{ row.total_value_formatted }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% if assets.is_empty() %}
+                    <tr>
+                        <td colspan="4" class="px-6 py-6 text-center text-white/30">Nenhum ativo cadastrado ainda.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
